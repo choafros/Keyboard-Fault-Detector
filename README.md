@@ -1,13 +1,13 @@
 # Keyboard-Fault-Detector
 Python Keyboard Fault Detector (with Scancode) & Fixes
 
-This guide provides two tools to help you diagnose and permanently disable a faulty or "stuck" key on a Windows machine.
+# This guide provides two tools to help you diagnose and permanently disable a faulty or "stuck" key on a Windows machine.
 
-key_tester.py: A Python script to identify the name and hardware scancode of any key being pressed, even phantom presses from a faulty key.
+key.py: A Python script to identify the name and hardware scancode of any key being pressed, even phantom presses from a faulty key.
 
 Windows Registry Fix: A permanent solution to disable a key at the system level using the scancode found with the Python script.
 
-1. Python Keyboard Fault Detector (key_tester.py)
+1. Python Keyboard Fault Detector (key.py)
 This script is your diagnostic tool. It listens to all keyboard activity and prints the name and unique hardware scancode for every key press it detects. If a key is malfunctioning and sending repeated signals, this script will reveal exactly which key it is and provide the scancode needed for the registry fix.
 
 Requirements
@@ -26,7 +26,7 @@ Step 2: Run the Script with Administrator Privileges
 
 It is essential to run this script as an administrator, otherwise it cannot monitor system-wide keyboard events.
 
-Save the script from the Canvas to a file named key_tester.py.
+Save the script from the Canvas to a file named key.py.
 
 Right-click the Start Menu and select Command Prompt (Admin) or Windows PowerShell (Admin).
 
@@ -34,7 +34,7 @@ Navigate to the directory where you saved the file (e.g., cd C:\Users\YourUser\D
 
 Run the script using the command:
 
-python key_tester.py
+python key.py
 
 Step 3: Diagnose the Faulty Key
 
