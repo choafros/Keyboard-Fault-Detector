@@ -30,3 +30,121 @@ Open a Command Prompt or PowerShell terminal and run:
 
 ```bash
 pip install keyboard
+```
+
+#### Step 2: Run the Script with Administrator Privileges
+
+1. Save the script from the Canvas to a file named `key.py`.
+2. Right-click the Start Menu and select **Command Prompt (Admin)** or **Windows PowerShell (Admin)**.
+3. Navigate to the directory where you saved the file:
+
+   ```bash
+   cd C:\Users\YourUser\Desktop
+   ```
+
+4. Run the script:
+
+   ```bash
+   python key.py
+   ```
+
+#### Step 3: Diagnose the Faulty Key
+
+- Once the script is running, do **not** touch your keyboard.
+- Watch the output. If a key is faulty, you will see its details spammed repeatedly in the console:
+
+  ```
+  Key Pressed: browser_home (Scancode: 562)
+  ```
+
+- **Note down the Scancode number**. This is the crucial piece of information you need for the permanent fix.
+- Press the **Esc** key to stop the script.
+
+---
+
+### Optional: Using a Batch File for Easy Execution
+
+You can create a batch file (`.bat`) to launch the Python script more conveniently.
+
+#### 1. Create the Batch File
+
+1. Open **Notepad** or any text editor.
+2. Paste the following code:
+
+   ```bat
+   @echo off
+   REM This batch file runs the key.py script.
+   REM It must be in the same folder as the Python script.
+
+   python key.py
+
+   REM The 'pause' command keeps the window open after the script finishes.
+   pause
+   ```
+
+3. Go to **File > Save As...**
+4. Change the "Save as type" dropdown to **All Files (*.*)**.
+5. Name the file `run_key.bat` and save it in the same directory as `key.py`.
+
+#### 2. Run the Batch File as Administrator
+
+1. Navigate to the folder where you saved both files.
+2. Right-click on `run_key.bat`.
+3. Select **Run as administrator**.
+
+---
+
+## 2. Windows Registry Fix (Permanent Disable)
+
+This method uses the scancode you found to tell Windows to completely ignore any input from that specific key. This is the most powerful software method for disabling a key.
+
+> ⚠️ **Warning:** Editing the registry can be risky. Follow these steps carefully.
+
+### Step 1: Open Registry Editor
+
+1. Press **Windows Key + R** to open the Run dialog.
+2. Type `regedit` and press Enter.
+3. Click **Yes** to allow changes.
+
+### Step 2: Navigate to the Keyboard Layout Key
+
+Paste the following path into the address bar and press Enter:
+
+```
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout
+```
+
+### Step 3: Create the Scancode Map
+
+1. In the right-hand pane, right-click on an empty space.
+2. Select **New > Binary Value**.
+3. Name the new value **Scancode Map**.
+
+### Step 4: Enter the Disabling Code
+
+1. Double-click the `Scancode Map` value you just created.
+2. In the **Edit Binary Value** window, enter the following code to disable the **Browser Home** key (scancode `E032`):
+
+   ```
+   00 00 00 00 00 00 00 00
+   02 00 00 00 00 00 32 E0
+   00 00 00 00
+   ```
+
+3. Click **OK**.
+
+### Step 5: Restart Your Computer
+
+Restart your PC for the changes to take effect. The faulty key should now be permanently disabled.
+
+---
+
+## How to Undo the Registry Fix
+
+If you ever need to re-enable the key:
+
+1. Navigate back to the same location in Registry Editor.
+2. Right-click the **Scancode Map** value and select **Delete**.
+3. Restart your computer.
+
+---
